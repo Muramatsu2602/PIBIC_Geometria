@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using CapturaTela;
 
@@ -15,9 +16,16 @@ namespace CShp_DataGridViewImagens
     {
         public frmLogin()
         {
+            Thread t = new Thread(new ThreadStart(StartForm));
+            t.Start();
+            Thread.Sleep(5000);
             InitializeComponent();
+            t.Abort();
         }
-
+        private void StartForm()
+        {
+            Application.Run(new frmSplashScreen());
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             String[] dados = new String[100];
